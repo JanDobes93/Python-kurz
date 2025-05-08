@@ -15,10 +15,11 @@ def generate_secret_number():
     - Všechny číslice jsou unikátní.
 
     """
-    first_digit = random.randint(1, 9)
-    remaining_digits = random.sample(range(10), 3)
-    digits = [first_digit] + remaining_digits
-    secret = ''.join(str(digit) for digit in digits)
+    digits = list(range(10))                      # vytvoří list čísel mezi 0–9
+    first_digit = random.choice(digits[1:])       # vybere číslo mezi 1–9 (0 nesmí být první)
+    digits.remove(first_digit)                    # odebere číslo, aby se neopakovalo
+    remaining_digits = random.sample(digits, 3)   # vybere 3 různé čísla ze zbytku listu
+    secret = str(first_digit) + ''.join(str(d) for d in remaining_digits)
     return secret
 
 def check_player_entry(user_number):
